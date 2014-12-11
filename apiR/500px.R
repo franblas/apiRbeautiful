@@ -3,12 +3,20 @@
 # Necessite les librairies plyr,httr,jsonlite,proto,stringr
 # ----------------------------------------------
 
+library("stringr")
+library("httr")
+library("jsonlite")
+library("plyr")
+library("proto")
+library("stringr")
+
 CinqCentPx <- proto(expr={
   
   className <- "500px"
   helpUrl <- "https://github.com/500px/api-documentation"
   apiUrl <- "https://api.500px.com/v1/"
   apiKey <- ""
+  nbCall <- 0
   
   # Avoid caracter utf8
   avoidUTF8 <- function(.,text){
@@ -32,6 +40,7 @@ CinqCentPx <- proto(expr={
     res4 <- .$avoidUTF8(x$longitude)
     res5 <- .$avoidUTF8(x$image_url)
     res6 <- .$avoidUTF8(x$user$country)
+    .$nbCall <- .$nbCall + 1
     return (data.frame(title=res1,dexcription=res2,latitude=res3,longitude=res4,usercountry=res6,link=res5))
   }
   
@@ -45,6 +54,7 @@ CinqCentPx <- proto(expr={
     res4 <- .$avoidUTF8(x$longitude)
     res5 <- .$avoidUTF8(x$image_url)
     res6 <- .$avoidUTF8(x$user$country)
+    .$nbCall <- .$nbCall + 1
     return (data.frame(title=res1,dexcription=res2,latitude=res3,longitude=res4,usercountry=res6,link=res5))
   }
   
@@ -58,6 +68,7 @@ CinqCentPx <- proto(expr={
     res4 <- .$avoidUTF8(x$longitude)
     res5 <- .$avoidUTF8(x$image_url)
     res6 <- .$avoidUTF8(x$user$country)
+    .$nbCall <- .$nbCall + 1
     return (data.frame(title=res1,dexcription=res2,latitude=res3,longitude=res4,usercountry=res6,link=res5))
   }
   
@@ -72,6 +83,7 @@ CinqCentPx <- proto(expr={
     res4 <- .$avoidUTF8(x$longitude)
     res5 <- .$avoidUTF8(x$image_url)
     res6 <- .$avoidUTF8(x$user$country)
+    .$nbCall <- .$nbCall + 1
     return (data.frame(title=res1,dexcription=res2,latitude=res3,longitude=res4,usercountry=res6,link=res5))
   }
   
@@ -82,6 +94,7 @@ CinqCentPx <- proto(expr={
     res1 <- .$avoidUTF8(x$title)
     res2 <- .$avoidUTF8(x$user$country)
     res3 <- .$avoidUTF8(x$user$fullname)
+    .$nbCall <- .$nbCall + 1
     return (data.frame(title=res1,usercountry=res2,username=res3))
   }
   

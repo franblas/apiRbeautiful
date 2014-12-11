@@ -3,11 +3,19 @@
 # Necessite les librairies plyr,httr,jsonlite,proto,stringr
 # ------------------------------------------------
 
+library("stringr")
+library("httr")
+library("jsonlite")
+library("plyr")
+library("proto")
+library("stringr")
+
 Vine <- proto(expr={
   
   className <- "Vine"
   helpUrl <- "https://github.com/starlock/vino/wiki/API-Reference"
   apiUrl <- "https://api.vineapp.com/"
+  nbCall <- 0
   
   # Avoid caracter utf8
   avoidUTF8 <- function(.,text){
@@ -21,6 +29,7 @@ Vine <- proto(expr={
     x <- as.data.frame(fromJSON(str)$data$records)
     y <- .$avoidUTF8(x$description) 
     yy <- .$avoidUTF8(x$permalinkUrl)
+    .$nbCall <- .$nbCall + 1
     return (data.frame(description=y,link=yy))
   }
   
@@ -30,6 +39,7 @@ Vine <- proto(expr={
     x <- as.data.frame(fromJSON(str)$data$records)
     y <- .$avoidUTF8(x$description) 
     yy <- .$avoidUTF8(x$permalinkUrl)
+    .$nbCall <- .$nbCall + 1
     return (data.frame(description=y,link=yy))
   }
   

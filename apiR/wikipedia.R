@@ -3,11 +3,19 @@
 # Necessite les librairies plyr,httr,jsonlite,proto
 # ------------------------------------------------
 
+library("stringr")
+library("httr")
+library("jsonlite")
+library("plyr")
+library("proto")
+library("stringr")
+
 Wikipedia <- proto(expr={
   
   className <- "Wikipedia"
   helpUrl <- "http://en.wikipedia.org/w/api.php?action=help&modules=query"
   apiUrl <- "http://en.wikipedia.org/w/api.php?action=query&format=json&"
+  nbCall <- 0
   
   # Correct space caracter for url
   correctSpace <- function(., word){
@@ -21,6 +29,7 @@ Wikipedia <- proto(expr={
     str <- paste(apiUrl,"prop=linkshere&titles=",search,"&lhlimit=",nblimit, sep="")
     x <- as.data.frame(fromJSON(str))
     y <- x[, ncol(x)]
+    .$nbCall <- .$nbCall + 1
     return (y) #list
   }
   
@@ -30,6 +39,7 @@ Wikipedia <- proto(expr={
     str <- paste(apiUrl,"prop=links&titles=",search,"&pllimit=",nblimit, sep="")
     x <- as.data.frame(fromJSON(str))
     y <- x[, ncol(x)]
+    .$nbCall <- .$nbCall + 1
     return (y) 
   }
   
@@ -39,6 +49,7 @@ Wikipedia <- proto(expr={
     str <- paste(apiUrl,"list=prefixsearch&pssearch=",search,"&pslimit=",nblimit, sep="")
     x <- as.data.frame(fromJSON(str))
     y <- x[, (ncol(x)-1)]
+    .$nbCall <- .$nbCall + 1
     return (y)
   }
   
@@ -48,6 +59,7 @@ Wikipedia <- proto(expr={
     str <- paste(apiUrl,"list=search&srsearch=",search,"&srlimit=",nblimit, sep="")
     x <- as.data.frame(fromJSON(str))
     y <- x[, (ncol(x)-4)]
+    .$nbCall <- .$nbCall + 1
     return (y)
   }
   
@@ -56,6 +68,7 @@ Wikipedia <- proto(expr={
     str <- paste(apiUrl,"list=geosearch&gsradius=",radius,"&gscoord=",lat,"|",long,"&gslimit=",nblimit, sep="")
     x <- as.data.frame(fromJSON(str))
     y <- x[, (ncol(x)-4)]
+    .$nbCall <- .$nbCall + 1
     return (y)
   }
   
@@ -64,6 +77,7 @@ Wikipedia <- proto(expr={
     str <- paste(apiUrl,"list=protectedtitles&ptlimit=",nblimit, sep="")
     x <- as.data.frame(fromJSON(str))
     y <- x[, (ncol(x)-2)]
+    .$nbCall <- .$nbCall + 1
     return (y)
   }
   
@@ -72,6 +86,7 @@ Wikipedia <- proto(expr={
     str <- paste(apiUrl,"list=recentchanges&rclimit=",nblimit, sep="")
     x <- as.data.frame(fromJSON(str))
     y <- x[, (ncol(x)-5)]
+    .$nbCall <- .$nbCall + 1
     return (y)
   }
   
