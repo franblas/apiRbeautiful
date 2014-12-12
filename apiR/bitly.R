@@ -13,6 +13,7 @@ library("stringr")
 Bitly <- proto(expr={
   
   className <- "Bitly"
+  category <- "Link"
   helpUrl <- "http://dev.bitly.com/api.html"
   apiUrl <- "https://api-ssl.bitly.com/v3/"
   apiKey <- ""

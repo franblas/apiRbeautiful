@@ -13,6 +13,7 @@ library("stringr")
 Vine <- proto(expr={
   
   className <- "Vine"
+  category <- "Video"
   helpUrl <- "https://github.com/starlock/vino/wiki/API-Reference"
   apiUrl <- "https://api.vineapp.com/"
   nbCall <- 0

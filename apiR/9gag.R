@@ -13,6 +13,7 @@ library("stringr")
 NineGag <- proto(expr={
   
   className <- "9Gag"
+  category <- "Social"
   helpUrl <- "https://github.com/k3min/infinigag"
   apiUrl <- "http://infinigag.eu01.aws.af.cm/"
   nbCall <- 0

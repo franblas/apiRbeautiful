@@ -13,6 +13,7 @@ library("stringr")
 Venmo <- proto(expr={
   
   className <- "Venmo"
+  category <- "Payement"
   helpUrl <- "http://www.snip2code.com/Snippet/54422/Hit-venmo-public-feed-API-to-see-what-th"
   apiUrl <- "https://venmo.com/api/v5/"
   nbCall <- 0

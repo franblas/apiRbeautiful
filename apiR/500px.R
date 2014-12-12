@@ -13,6 +13,7 @@ library("stringr")
 CinqCentPx <- proto(expr={
   
   className <- "500px"
+  category <- "Picture"
   helpUrl <- "https://github.com/500px/api-documentation"
   apiUrl <- "https://api.500px.com/v1/"
   apiKey <- ""

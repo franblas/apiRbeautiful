@@ -13,6 +13,7 @@ library("stringr")
 GoogleTrends <- proto(expr={
   
   className <- "Google Trends"
+  category <- "Data"
   helpUrl <- ""
   apiUrl <- "http://hawttrends.appspot.com/api/"
   nbCall <- 0

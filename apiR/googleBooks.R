@@ -13,6 +13,7 @@ library("stringr")
 GoogleBooks <- proto(expr={
   
   className <- "Google Books"
+  category <- "Book"
   helpUrl <- "https://developers.google.com/books/docs/v1/using#RetrievingVolume"
   apiUrl <- "https://www.googleapis.com/books/v1/"
   nbCall <- 0

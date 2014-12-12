@@ -13,6 +13,7 @@ library("stringr")
 Wikipedia <- proto(expr={
   
   className <- "Wikipedia"
+  category <- "Data"
   helpUrl <- "http://en.wikipedia.org/w/api.php?action=help&modules=query"
   apiUrl <- "http://en.wikipedia.org/w/api.php?action=query&format=json&"
   nbCall <- 0
