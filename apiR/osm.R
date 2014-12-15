@@ -50,6 +50,9 @@ OSM <- proto(expr={
     return (y)  
   }
   
-  
+  getCoordinatesCity <- function(., text=""){
+      y <- .$search(text)[1,1:2]
+      return (y)
+  }
   
 })#end of proto 
