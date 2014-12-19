@@ -14,7 +14,7 @@ Ebay <- proto(expr={
   
   className <- "Ebay"
   category <- "Shopping"
-  helpUrl <- ""
+  helpUrl <- "http://developer.ebay.com/"
   apiUrl <- "http://svcs.ebay.com/"
   apiKey <- ""
   nbCall <- 0
@@ -33,11 +33,47 @@ Ebay <- proto(expr={
   
   search <- function(., text="", limit=10){
     text <- .$correctSpace(text)
-    str <- paste(apiUrl,"", text, limit, sep="")
-    x <- as.data.frame(fromJSON(str))
-    y <- x[,c()]
+    str <- paste(apiUrl,"services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=", .$apiKey, "&RESPONSE-DATA-FORMAT=json&keywords=", text, "&paginationInput.entriesPerPage=", limit, sep="")
+    x <- as.data.frame(fromJSON(str)$findItemsByKeywordsResponse$searchResult)
+    y <- as.data.frame(x$item)
     .$nbCall <- .$nbCall + 1
     return (y)  
+  }
+  
+  getMostWatched <- function(., limit=10){
+    str <- paste(apiUrl,"MerchandisingService?OPERATION-NAME=getMostWatchedItems&SERVICE-NAME=MerchandisingService&CONSUMER-ID=", .$apiKey, "&RESPONSE-DATA-FORMAT=JSON&maxResults=", limit, sep="")
+    x <- as.data.frame(fromJSON(str)$getMostWatchedItemsResponse)
+    x <- x[,4:ncol(x)]
+    y <- x[,c("itemRecommendations.item.itemId","itemRecommendations.item.title","itemRecommendations.item.primaryCategoryName","itemRecommendations.item.country","itemRecommendations.item.buyItNowPrice","itemRecommendations.item.originalPrice","itemRecommendations.item.viewItemURL")]
+    .$nbCall <- .$nbCall + 1
+    return (y)  
+  }
+  
+  getSimilar <- function(., id="121187584160", limit=10){
+    str <- paste(apiUrl,"MerchandisingService?OPERATION-NAME=getSimilarItems&SERVICE-NAME=MerchandisingService&CONSUMER-ID=", .$apiKey, "&RESPONSE-DATA-FORMAT=JSON&itemId=", id,"&maxResults=", limit, sep="")
+    x <- as.data.frame(fromJSON(str)$getSimilarItemsResponse)
+    x <- x[,4:ncol(x)]
+    y <- x[,c("itemRecommendations.item.title","itemRecommendations.item.primaryCategoryName","itemRecommendations.item.country","itemRecommendations.item.buyItNowPrice","itemRecommendations.item.viewItemURL")]
+    .$nbCall <- .$nbCall + 1
+    return (y)  
+  }
+  
+  getTopSelling <- function(., limit=10){
+    str <- paste(apiUrl,"MerchandisingService?OPERATION-NAME=getTopSellingProducts&SERVICE-NAME=MerchandisingService&CONSUMER-ID=", .$apiKey, "&RESPONSE-DATA-FORMAT=JSON&maxResults=", limit, sep="")
+    x <- as.data.frame(fromJSON(str)$getTopSellingProductsResponse)
+    x <- x[,4:ncol(x)]
+    y <- x[,c("productRecommendations.product.productId","productRecommendations.product.title","productRecommendations.product.reviewCount","productRecommendations.product.productURL")]
+    .$nbCall <- .$nbCall + 1
+    return (y)  
+  }
+  
+  getPopularSearch <- function(., text="", limit=10){
+    text <- .$correctSpace(text)
+    str <- paste("http://open.api.ebay.com/","shopping?callname=FindPopularSearches&responseencoding=JSON&appid=", .$apiKey, "&siteid=0&version=531&QueryKeywords=", text, sep="")
+    x <- as.data.frame(fromJSON(str)$PopularSearchResult)
+    x <- x[,2:ncol(x)]
+    .$nbCall <- .$nbCall + 1
+    return (x)  
   }
   
 })#end of proto 
