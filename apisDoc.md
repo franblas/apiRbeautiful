@@ -46,6 +46,11 @@
 	<td>Book</td>
 	<td>No</td>
 </tr>
+<tr>
+	<td>GoogleTrends</td>
+	<td>Data</td>
+	<td>No</td>
+</tr>
 </tbody>
 </table>
 
@@ -523,4 +528,24 @@ searchBook <- function(., text="", limit=10)
 </tr>
 </tbody>
 </table>
-
+## Google Trends
+### Countries available
+South Africa,Germany,Saudi Arabia,Argentina,Australia,Austria,Belgium,Brazil,Canada,Chilia,Colombia,South Corea,Denemark,Egypt,Spain,USA,Finland,France,Greece,Hong Kong,Hongria,India,Indonesia,Israel,Italia,Japan,Kenya,Malaisia,Mexico,Nigeria,Norway,Holland,Philippines,Poland,Portugal,Czech Republic,Roumania,UK,Russia,Singapour,Sweden,Switzerland,Taiwan,Thailand,Turkey,Ukraine,Vietnam   
+### Dataframe
+```
+getTrends <- function(.,name="USA")
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> - </td>
+	<td>Trends from the country</td>
+</tr>
+</tbody>
+</table>
