@@ -51,6 +51,31 @@
 	<td>Data</td>
 	<td>No</td>
 </tr>
+<tr>
+	<td>Imdb</td>
+	<td>Movie</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>Osm</td>
+	<td>Map</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>Panoramio</td>
+	<td>Picture</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>Reddit</td>
+	<td>Social</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>RubyGems</td>
+	<td>Code</td>
+	<td>No</td>
+</tr>
 </tbody>
 </table>
 
@@ -546,6 +571,349 @@ getTrends <- function(.,name="USA")
 <tr>
 	<td> - </td>
 	<td>Trends from the country</td>
+</tr>
+</tbody>
+</table>
+## Imdb 
+### Dataframe
+```
+searchOmdb <- function(., text="")
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> Title </td>
+	<td>Title of the media</td>
+</tr>
+<tr>
+	<td> Year </td>
+	<td>Year of release</td>
+</tr>
+<tr>
+	<td> Type </td>
+	<td>Type of media</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 2
+```
+searchTitle <- function(., text="")
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> title </td>
+	<td>Title of the media</td>
+</tr>
+<tr>
+	<td> description </td>
+	<td>Description of the media</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 3
+```
+searchName <- function(., text="")
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> - </td>
+	<td>Names of actor</td>
+</tr>
+</tbody>
+</table>
+## OSM 
+### Dataframe
+```
+searchLatestNotes <- function(., text="", limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> V1 </td>
+	<td>Latitude of the place</td>
+</tr>
+<tr>
+	<td> V2 </td>
+	<td>Longitude of the place</td>
+</tr>
+<tr>
+	<td> V3 </td>
+	<td>Description of the place</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 2
+```
+search <- function(., text="", limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> lat </td>
+	<td>Latitude of the place</td>
+</tr>
+<tr>
+	<td> lon </td>
+	<td>Longitude of the place</td>
+</tr>
+<tr>
+	<td> display_name </td>
+	<td>Names of the place</td>
+</tr>
+<tr>
+	<td> importance </td>
+	<td>Relevance of the place, regarding the research</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 3
+```
+getCoordinatesCity <- function(., text="")
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> lat </td>
+	<td>Latitude of the place</td>
+</tr>
+<tr>
+	<td> lon </td>
+	<td>Longitude of the place</td>
+</tr>
+</tbody>
+</table>
+## Panoramio
+### Dataframe
+```
+getPopularWorldPhotos <- function(., limit=10)
+```  
+```
+getPhotosArea <- function(., latitude=0, longitude=0, range=5, limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>latitude</td>
+	<td>Latitude of the place</td>
+</tr>
+<tr>
+	<td>longitude</td>
+	<td>Longitude of the place</td>
+</tr>
+<tr>
+	<td>owner_name</td>
+	<td>Owner of the picture</td>
+</tr>
+<tr>
+	<td>photo_file_url</td>
+	<td>Url of the picture</td>
+</tr>
+<tr>
+	<td>photo_title</td>
+	<td>Title of the picture</td>
+</tr>
+<tr>
+	<td>upload_date</td>
+	<td>Date of the picture</td>
+</tr>
+</tbody>
+</table>
+## Reddit
+### Dataframe
+```
+searchArticle <- function(., text="", limit=10)
+```  
+```
+getHotTopics <- function(.,limit=10)
+```  
+```
+getControversialTopics <- function(.,limit=10)
+```  
+```
+getRandomTopics <- function(.)
+```
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>title</td>
+	<td>Title of the article</td>
+</tr>
+<tr>
+	<td>url</td>
+	<td>Url of the article</td>
+</tr>
+<tr>
+	<td>score</td>
+	<td>Score of the article</td>
+</tr>
+<tr>
+	<td>ups</td>
+	<td>Score of the article</td>
+</tr>
+<tr>
+	<td>num_comments</td>
+	<td>Number of comments for the article</td>
+</tr>
+<tr>
+	<td>subreddit</td>
+	<td>Subreddit of the article</td>
+</tr>
+<tr>
+	<td>selftext</td>
+	<td>Text of the article</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 2
+```
+getPopularSubreddits <- function(.,limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>display_name</td>
+	<td>Name of the subreddit</td>
+</tr>
+<tr>
+	<td>subscribers</td>
+	<td>Number of users for the subreddit</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 3
+```
+getPopularSubreddits <- function(.,limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>display_name</td>
+	<td>Name of the subreddit</td>
+</tr>
+<tr>
+	<td>subscribers</td>
+	<td>Number of users for the subreddit</td>
+</tr>
+<tr>
+	<td>title</td>
+	<td>Description of the subreddit</td>
+</tr>
+</tbody>
+</table>
+## RubyGems
+### Dataframe
+```
+search <- function(., text="")
+```  
+```
+latestAdded <- function(.)
+```  
+```
+latestUpdated <- function(.)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>Name of the gem</td>
+</tr>
+<tr>
+	<td>downloads</td>
+	<td>Number of downloads of the gem</td>
+</tr>
+<tr>
+	<td>info</td>
+	<td>Description of the gem</td>
+</tr>
+<tr>
+	<td>homepage_uri</td>
+	<td>Url of the projects gem</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 2
+```
+totalDownloadGems <- function(.)
+```   
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> - </td>
+	<td>Total number of download gems</td>
 </tr>
 </tbody>
 </table>
