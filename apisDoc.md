@@ -76,6 +76,26 @@
 	<td>Code</td>
 	<td>No</td>
 </tr>
+<tr>
+	<td>SoundCloud</td>
+	<td>Music</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>Tumblr</td>
+	<td>Social</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>Venmo</td>
+	<td>Payement</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>Vine</td>
+	<td>Video</td>
+	<td>No</td>
+</tr>
 </tbody>
 </table>
 
@@ -914,6 +934,257 @@ totalDownloadGems <- function(.)
 <tr>
 	<td> - </td>
 	<td>Total number of download gems</td>
+</tr>
+</tbody>
+</table>
+## Soundcloud
+### Dataframe
+```
+searchTracks <- function(., text="", limit=10)
+```  
+```
+getInfosTrack <- function(., id="182242225")
+```  
+```
+getLatestTracks <- function(., limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>title</td>
+	<td>Title of the track</td>
+</tr>
+<tr>
+	<td>download_count</td>
+	<td>Number of downloads</td>
+</tr>
+<tr>
+	<td>favoritings_count</td>
+	<td>Number of favorites</td>
+</tr>
+<tr>
+	<td>comment_count</td>
+	<td>Number of comments</td>
+</tr>
+<tr>
+	<td>genre</td>
+	<td>Genre of the track</td>
+</tr>
+<tr>
+	<td>duration</td>
+	<td>Duration of the track</td>
+</tr>
+<tr>
+	<td>tag_list</td>
+	<td>Tags for the track</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>Description of the track</td>
+</tr>
+<tr>
+	<td>permalink_url</td>
+	<td>Url of the track</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 2
+```
+searchUsers <- function(., text="", limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>username</td>
+	<td>Nickname of the user</td>
+</tr>
+<tr>
+	<td>country</td>
+	<td>Country of the user</td>
+</tr>
+<tr>
+	<td>full_name</td>
+	<td>Name of the user</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>Description for the profile</td>
+</tr>
+<tr>
+	<td>city</td>
+	<td>City of the user</td>
+</tr>
+<tr>
+	<td>website</td>
+	<td>Webiste of the user</td>
+</tr>
+<tr>
+	<td>track_count</td>
+	<td>Number of tracks</td>
+</tr>
+<tr>
+	<td>followers_count</td>
+	<td>Number of followers</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 3
+```
+searchGroups <- function(., text="", limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>Name of the group</td>
+</tr>
+<tr>
+	<td>track_count</td>
+	<td>Number of groups tracks</td>
+</tr>
+<tr>
+	<td>members_count</td>
+	<td>Number of groups members</td>
+</tr>
+<tr>
+	<td>contributors_count</td>
+	<td>Number of groups contributors</td>
+</tr>
+<tr>
+	<td>permalink_url</td>
+	<td>Url of the group</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>Description of the group</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 4
+```
+getLatestComments <- function(., limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>track_id</td>
+	<td>Id of the track</td>
+</tr>
+<tr>
+	<td>body</td>
+	<td>Latest comment for the track</td>
+</tr>
+</tbody>
+</table>
+## Tumblr
+### Dataframe
+```
+searchByTag <- function(., text="", limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>post_url</td>
+	<td>Url of the post</td>
+</tr>
+<tr>
+	<td>slug</td>
+	<td>Title of the post</td>
+</tr>
+<tr>
+	<td>date</td>
+	<td>Date of the post</td>
+</tr>
+<tr>
+	<td>tags</td>
+	<td>Tags for the post</td>
+</tr>
+<tr>
+	<td>note_count</td>
+	<td>Number of note for the post</td>
+</tr>
+<tr>
+	<td>source_url</td>
+	<td>Url of the source</td>
+</tr>
+</tbody>
+</table>
+## Venmo
+### Dataframe
+```
+getPublic <- function(.)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>message</td>
+	<td>Message of the post</td>
+</tr>
+<tr>
+	<td>link</td>
+	<td>Link of the post</td>
+</tr>
+</tbody>
+</table>
+## Vine
+### Dataframe
+```
+getPopular <- function(.)
+```  
+```
+searchByTag <- function(., tag="")
+```   
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>description</td>
+	<td>Description of the post</td>
+</tr>
+<tr>
+	<td>link</td>
+	<td>Link of the post</td>
 </tr>
 </tbody>
 </table>
