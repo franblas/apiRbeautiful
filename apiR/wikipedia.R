@@ -65,7 +65,7 @@ Wikipedia <- proto(expr={
   }
   
   # Search pages around the given point
-  searchGeo <- function(.,radius=1000,lat,long,nblimit=10){
+  searchGeo <- function(.,radius=1000,lat=0,long=0,nblimit=10){
     str <- paste(apiUrl,"list=geosearch&gsradius=",radius,"&gscoord=",lat,"|",long,"&gslimit=",nblimit, sep="")
     x <- as.data.frame(fromJSON(str))
     y <- x[, (ncol(x)-4)]

@@ -96,6 +96,11 @@
 	<td>Video</td>
 	<td>No</td>
 </tr>
+<tr>
+	<td>Wikipedia</td>
+	<td>Data</td>
+	<td>No</td>
+</tr>
 </tbody>
 </table>
 
@@ -1185,6 +1190,43 @@ searchByTag <- function(., tag="")
 <tr>
 	<td>link</td>
 	<td>Link of the post</td>
+</tr>
+</tbody>
+</table>
+## Wikipedia
+### Dataframe
+```
+getLinkSphere <- function(., search="", nblimit=10)
+```  
+```
+getLinks <- function(., search="", nblimit=10)
+```  
+```
+searchByPrefix <- function(., search="", nblimit=10)
+```  
+```
+searchText <- function(.,search="",nblimit=10)
+```  
+```
+searchGeo <- function(.,radius=1000,lat=0,long=0,nblimit=10)
+```  
+```
+latestProtected <- function(.,nblimit=10)
+```  
+```
+latestChanges <- function(.,nblimit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> - </td>
+	<td>Data asked for</td>
 </tr>
 </tbody>
 </table>
