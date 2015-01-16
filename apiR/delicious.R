@@ -42,7 +42,12 @@ Delicious <- proto(expr={
     text <- .$correctSpace(text)
     str <- paste(apiUrl,"tag/", text, "?count=", limit, sep="")
     x <- as.data.frame(fromJSON(str))
-    y <- x[,c("d","u","t")]
+    if("d" %in% colnames(x)){
+      y <- x[,c("d","u","t")]
+    }
+    else{
+      y <- data.frame(d="",u="",t="")
+    }
     .$nbCall <- .$nbCall + 1
     return (y)  
   }

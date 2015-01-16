@@ -36,6 +36,7 @@ Ebay <- proto(expr={
     str <- paste(apiUrl,"services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=", .$apiKey, "&RESPONSE-DATA-FORMAT=json&keywords=", text, "&paginationInput.entriesPerPage=", limit, sep="")
     x <- as.data.frame(fromJSON(str)$findItemsByKeywordsResponse$searchResult)
     y <- as.data.frame(x$item)
+    y <- y[,c("itemId","title","primaryCategory","viewItemURL","location","sellingStatus")]
     .$nbCall <- .$nbCall + 1
     return (y)  
   }

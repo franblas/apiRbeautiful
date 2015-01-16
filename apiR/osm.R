@@ -37,6 +37,7 @@ OSM <- proto(expr={
     y <- data.frame()
     y <- t(as.data.frame(x$features.geometry$coordinates))
     y <- cbind(y,t(as.data.frame(t(x$features.properties$comments))))
+    y <- as.data.frame(y)
     .$nbCall <- .$nbCall + 1
     return (y)   
   }
@@ -45,7 +46,13 @@ OSM <- proto(expr={
     text <- .$correctSpace(text)
     str <- paste("http://nominatim.openstreetmap.org/","search?q=", text,"&format=json&limit=", limit, sep="")
     x <- as.data.frame(fromJSON(str))
-    y <- x[,c("lat","lon","display_name","importance")]
+    if("lat" %in% colnames(x)){
+      y <- x[,c("lat","lon","display_name","importance")]
+    }
+    else{
+      y <- data.frame(lat="",lon="",display_name="",importance="")
+        
+    }
     .$nbCall <- .$nbCall + 1
     return (y)  
   }

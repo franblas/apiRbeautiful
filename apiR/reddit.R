@@ -34,7 +34,12 @@ Reddit <- proto(expr={
     text <- .$correctSpace(text)
     str <- paste(apiUrl,"search.json?q=", text, "&t=year&limit=", limit, sep="")
     x <- as.data.frame(fromJSON(str)$data$children$data)
-    y <- x[,c("title","url","score","ups","num_comments","subreddit","selftext")]
+    if("title" %in% colnames(x)){
+      y <- x[,c("title","url","score","ups","num_comments","subreddit","selftext")]
+    }
+    else{
+      y <- data.frame(title="",url="",score="",ups="",num_comments="",subreddit="",selftext="")
+    }
     .$nbCall <- .$nbCall + 1
     return (y)  
   }
