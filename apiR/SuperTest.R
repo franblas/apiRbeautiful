@@ -11,6 +11,7 @@ source("wikipedia.R")
 source("reddit.R")
 source("googleTrends.R")
 source("osm.R")
+source("panoramio.R")
 
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
@@ -109,11 +110,18 @@ superListWiki <- function(word="yop",limit=500){
   return(list3)
 }
 
-superWikiRadius <- function(words=list()){
-  dfCoord <- OSM$getCoordinatesCity(toString(words[[1]]))
+superOSMFrame <- function(words=list()){
+  df <- OSM$getCoordinatesCity(toString(words[[1]]))
   for(i in 2:length(words)){
-    dfCoord <- rbind(dfCoord,OSM$getCoordinatesCity(toString(words[[i]])))
+    df <- rbind(df,OSM$getCoordinatesCity(toString(words[[i]])))
   }
+  toBeRemoved <- which(df$lat=="")
+  df <- df[-toBeRemoved,]
+  return(df)
+}
+
+superWikiRadius <- function(words=list()){
+  dfCoord <- superOSMFrame(words)
   list2 <- list()
   list3 <- list()
   m <- 0
@@ -144,6 +152,8 @@ superDeliciousFrame <- function(words=list(),nblimit=10){
   for(i in 2:length(words)){
     df <- rbind(df,Delicious$search(toString(words[[i]]),limit=nblimit))
   }
+  toBeRemoved <- which(df$u=="")
+  df <- df[-toBeRemoved,]
   return(df)
 }
 
@@ -151,6 +161,19 @@ superImdbFrame <- function(words=list()){
   df <- IMDB$searchTitle(toString(words[[1]]))
   for(i in 2:length(words)){
     df <- rbind(df,IMDB$searchTitle(toString(words[[i]])))
+  }
+  return(df)
+}
+
+superPanoramio <- function(words=list()){
+  dfCoord <- superOSMFrame(words)
+  lat2 <- factor(as.list(dfCoord$lat)[[1]])
+  lon2 <- factor(as.list(dfCoord$lon)[[1]])
+  df <- Panoramio$getPhotosArea(latitude=lat2, longitude=lon2)
+  for(j in 2:length(words)){
+    lat2 <- factor(as.list(dfCoord$lat)[[j]])
+    lon2 <- factor(as.list(dfCoord$lon)[[j]])
+    df <- rbind(df,Panoramio$getPhotosArea(latitude=lat2, longitude=lon2)) 
   }
   return(df)
 }
@@ -164,4 +187,4 @@ superImdbFrame <- function(words=list()){
 #DeliTrends <- superDeliciousFrame(words=trends)
 #DeliApple <- superDeliciousFrame(words)
 #DeliRadius <- superDeliciousFrame(words=radius)
-imdbTrends <- superImdbFrame(words=trends)
+#imdbTrends <- superImdbFrame(words=trends)
