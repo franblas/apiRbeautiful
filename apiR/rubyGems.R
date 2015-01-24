@@ -15,7 +15,7 @@ RubyGems <- proto(expr={
   className <- "RubyGems"
   category <- "Code"
   helpUrl <- "http://guides.rubygems.org/rubygems-org-api/"
-  apiUrl <- "https://rubygems.org/api/v1/"
+    apiUrl <- "https://rubygems.org/api/v1/"
   nbCall <- 0
   
   # Avoid caracter utf8
@@ -31,9 +31,15 @@ RubyGems <- proto(expr={
   }
   
   search <- function(., text=""){
+    text <- .$correctSpace(text)
     str <- paste(apiUrl,"search.json?query=", text, sep="")
     x <- as.data.frame(fromJSON(str))
-    y <- x[,c("name","downloads","info","homepage_uri")]
+    if("name" %in% colnames(x)){
+      y <- x[,c("name","downloads","info","homepage_uri")]
+    }
+    else{
+      y <- data.frame(name="",downloads="",info="",homepage_uri="")
+    }
     .$nbCall <- .$nbCall + 1
     return (y)  
   }

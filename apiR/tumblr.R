@@ -25,10 +25,22 @@ Tumblr <- proto(expr={
     return (res)
   }
   
-    searchByTag <- function(., text="", limit=10){
+  # Correct space caracter for search
+  correctSpace <- function(., word){
+    x <- gsub(" ","+",word, fixed=TRUE)
+    return (x)
+  }
+  
+  searchByTag <- function(., text="", limit=10){
+    text <- .$correctSpace(text)  
     str <- paste(apiUrl,"tagged?tag=", text,"&limit=", limit,"&api_key=", apiKey, sep="")
     x <- as.data.frame(fromJSON(str)$response)
-    y <- x[,c("post_url","slug","date","tags","note_count","source_url")]
+    if("post_url" %in% colnames(x)){
+      y <- x[,c("post_url","slug","date","tags","note_count")]
+    }
+    else{
+      y <- data.frame(post_url="",slug="",date="",tags="",note_count="") 
+    }
     .$nbCall <- .$nbCall + 1
     return (y)  
   }

@@ -12,6 +12,11 @@ source("reddit.R")
 source("googleTrends.R")
 source("osm.R")
 source("panoramio.R")
+source("dailymotion.R")
+source("rubyGems.R")
+source("tumblr.R")
+source("vine.R")
+source("googleBooks.R")
 
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
@@ -125,7 +130,7 @@ superWikiRadius <- function(words=list()){
   list2 <- list()
   list3 <- list()
   m <- 0
-  for(j in 1:length(words)){
+  for(j in 1:length(dfCoord$lat)){
     lat2 <- factor(as.list(dfCoord$lat)[[j]])
     lon2 <- factor(as.list(dfCoord$lon)[[j]])
     list2 <- Wikipedia$searchGeo(lat=lat2,long=lon2)
@@ -175,6 +180,64 @@ superPanoramio <- function(words=list()){
     lon2 <- factor(as.list(dfCoord$lon)[[j]])
     df <- rbind(df,Panoramio$getPhotosArea(latitude=lat2, longitude=lon2)) 
   }
+  return(df)
+}
+
+superDailymotionFrame <- function(words=list()){
+  df <- Dailymotion$searchVideos(toString(words[[1]]))
+  for(i in 2:length(words)){
+    df <- rbind(df,Dailymotion$searchVideos(toString(words[[i]])))
+  }
+  return(df)
+}
+
+superRubygemsFrame <- function(words=list()){
+  df <- RubyGems$search(toString(words[[1]]))
+  for(i in 2:length(words)){
+    df <- rbind(df,RubyGems$search(toString(words[[i]])))
+  }
+  toBeRemoved <- which(df$name=="")
+  df <- df[-toBeRemoved,]
+  return(df)
+}
+
+superTumblrFrame <- function(words=list()){
+  df <- Tumblr$searchByTag(toString(words[[1]]))
+  for(i in 2:length(words)){
+    df <- rbind(df,Tumblr$searchByTag(toString(words[[i]])))
+  }
+  toBeRemoved <- which(df$post_url=="")
+  df <- df[-toBeRemoved,]
+  return(df)
+}
+
+superVineFrame <- function(words=list()){
+  words[[1]] <- iconv(toString(words[[1]]),to='ASCII//TRANSLIT')
+  splitword <- strsplit(toString(words[[1]]), " ")
+  df <- Vine$searchByTag(toString(splitword[[1]][1]))
+  for(j in 2:length(splitword)){
+    df <- rbind(df,Vine$searchByTag(toString(splitword[[1]][j])))
+  }
+  for(i in 2:length(words)){
+    words[[i]] <- iconv(toString(words[[i]]),to='ASCII//TRANSLIT')
+    print(toString(words[[i]]))
+    splitword <- strsplit(toString(words[[i]]), " ")
+    for(k in 1:length(splitword)){
+      df <- rbind(df,Vine$searchByTag(toString(splitword[[1]][k])))
+    }
+  }
+  toBeRemoved <- which(df$link=="")
+  df <- df[-toBeRemoved,]
+  return(df)
+}
+
+superBooksFrame <- function(words=list()){
+  df <- GoogleBooks$searchBook(toString(words[[1]]))
+  for(i in 2:length(words)){
+    df <- rbind(df,GoogleBooks$searchBook(toString(words[[i]])))
+  }
+  toBeRemoved <- which(df$title=="")
+  df <- df[-toBeRemoved,]
   return(df)
 }
 
