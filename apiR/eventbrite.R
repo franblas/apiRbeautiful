@@ -41,8 +41,13 @@ Eventbrite <- proto(expr={
     x4 <- x$name
     x5 <- x$description
     y <- as.data.frame(x$url)
+    if(any(is.na(x3))){
+      y$category <- data.frame(name="")
+    }
+    else{
+      y$category <- x3$name
+    }
     y$name <- x4$text
-    y$category <- x3$name
     y$latitude <- x2$address$latitude
     y$longitude <- x2$address$longitude
     y$num_past_events <- x1$num_past_events

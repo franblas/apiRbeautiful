@@ -17,6 +17,7 @@ source("rubyGems.R")
 source("tumblr.R")
 source("vine.R")
 source("googleBooks.R")
+source("ebay.R")
 
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
@@ -29,6 +30,7 @@ superTrends <- function(){
     for(j in 1:length(list2)){
       list2[j] <- trim(list2[j])
       if(nchar(list2[j])>2){
+        list2[j] <- gsub('#','',list2[j])
         list3[m] <- list2[j]
         m <- m + 1
       }
@@ -153,12 +155,22 @@ superRedditFrame <- function(words=list(),nblimit=10){
 }
 
 superDeliciousFrame <- function(words=list(),nblimit=10){
-  df <- Delicious$search(toString(words[[1]]),limit=nblimit)
-  for(i in 2:length(words)){
-    df <- rbind(df,Delicious$search(toString(words[[i]]),limit=nblimit))
+  if(length(words)!=0) {
+    df <- Delicious$search(toString(words[[1]]),limit=nblimit)
+    df$realword <- c(toString(words[[1]]))
+    print("Deli 1")
+    for(i in 2:length(words)){
+      temp <- Delicious$search(toString(words[[i]]),limit=nblimit)
+      temp$realword <- c(toString(words[[i]]))
+      df <- rbind(df,temp)
+      print(paste("Deli",i))
+    }
+    toBeRemoved <- which(df$u=="")
+    df <- df[-toBeRemoved,]
   }
-  toBeRemoved <- which(df$u=="")
-  df <- df[-toBeRemoved,]
+  else{
+    df <- data.frame(d="",u="",t="",realword="")
+  }
   return(df)
 }
 
@@ -241,13 +253,61 @@ superBooksFrame <- function(words=list()){
   return(df)
 }
 
+superEbayFrame <- function(words=list(),apikey=""){
+  EbayK <- proto(Ebay,apiKey=apikey)
+  df <- EbayK$search(toString(words[[1]]))
+  for(i in 2:length(words)){
+    df <- rbind(df,EbayK$search(toString(words[[i]])))
+  }
+  toBeRemoved <- which(df$itemId=="")
+  df <- df[-toBeRemoved,]
+  return(df)
+}
+
+superEventbriteFrame <- function(words=list(),apikey=""){
+  EventbriteK <- proto(Eventbrite,apiKey=apikey)
+  df <- EventbriteK$searchEvents(toString(words[[1]]))
+  for(i in 2:10){
+    print (i)
+    df <- rbind(df,EventbriteK$searchEvents(toString(words[[i]])))
+  }
+  #toBeRemoved <- which(df$itemId=="")
+  #df <- df[-toBeRemoved,]
+  return(df)
+}
+
+maxiDelicious <- function(searchword=""){
+  words <- superListWiki(word=searchword)
+  print("End list")
+  radius <- superWikiRadius(words)
+  print("End of list Generation")
+  df <- superDeliciousFrame(words,nblimit=5)
+  print("End of Delicious")
+  df2 <- superDeliciousFrame(words=radius,nblimit=5)
+  print("End of Delicious Radius")
+  df$beginword <- c(searchword)
+  df2$beginword <- c(searchword)
+  total <- rbind(df,df2)
+  return(total)
+}
+
+
 #############################################################################
 
-#trends <- superTrends()
-#words <- superListWiki(word="apple")
-#radius <- superWikiRadius(trends)
+# trends <- superTrends()
+# print("End list 1")
+# radiusTrends <- superWikiRadius(trends)
+# print("End list 3")
+# DeliTrends <- superDeliciousFrame(words=trends,nblimit=100)
+# print("End of Delicious Trends")
+# DeliRadiusTrends <- superDeliciousFrame(words=radiusTrends,nblimit=100)
+# print("End of Delicious Radius Trends")
 
-#DeliTrends <- superDeliciousFrame(words=trends)
-#DeliApple <- superDeliciousFrame(words)
-#DeliRadius <- superDeliciousFrame(words=radius)
-#imdbTrends <- superImdbFrame(words=trends)
+#yop <- list("cat","dog","windows","cloud","phone","water","tea","sofa","house","chair","kitchen","watch")
+#yop <- list("tea")
+#dftest3 <- maxiDelicious(yop[1])
+# for(i in 2:length(yop)){
+#   print(yop[i])
+#   dftest3 <- rbind(dftest3,maxiDelicious(yop[i]))
+# }
+
