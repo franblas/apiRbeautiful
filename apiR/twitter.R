@@ -35,6 +35,10 @@ Twitter <- proto(expr={
     return (x)
   }
   
+  connection <- function(.){
+    return (setup_twitter_oauth(.$apiKey,.$apiSecret,.$accessToken,.$accessTokenSecret))
+  }
+  
   search <- function(.,word="",limit=50){
     temp <- twListToDF(searchTwitter(word,n=limit,lang="en"))
     url <- "https://twitter.com/"
@@ -42,17 +46,20 @@ Twitter <- proto(expr={
     iid <- temp$id
     u <- paste(url,name,"/statuses/",iid,sep="")
     temp$url <- u
+    .$nbCall <- .$nbCall + 1
     return (temp[,c('text','url','favoriteCount','retweetCount','latitude','longitude')])
   }
   
   getTrendsByCoord <- function(.,la=48.223703,lo=-1.691373){
     wo <- closestTrendLocations(lat=la,long=lo)$woeid
+    .$nbCall <- .$nbCall + 1
     return (getTrends(wo[,c('name','url','query')]))
   }
   
   getTrendsByCity <- function(.,city="San Francisco"){
     loc <- availableTrendLocations()
     wo <- loc[which(tolower(loc$name)==tolower(city)),]$woeid
+    .$nbCall <- .$nbCall + 1
     return (getTrends(wo[,c('name','url','query')]))
   }
   
