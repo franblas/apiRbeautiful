@@ -87,6 +87,11 @@
 	<td>No</td>
 </tr>
 <tr>
+	<td>Twitter</td>
+	<td>Social</td>
+	<td>Yes</td>
+</tr>
+<tr>
 	<td>Venmo</td>
 	<td>Payement</td>
 	<td>No</td>
@@ -1144,6 +1149,77 @@ searchByTag <- function(., text="", limit=10)
 </tr>
 </tbody>
 </table>
+
+##Twitter
+### Dataframe
+```
+search <- function(.,word="",limit=50)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>text</td>
+	<td>Text of the tweet</td>
+</tr>
+<tr>
+	<td>url</td>
+	<td>Url of the tweet</td>
+</tr>
+<tr>
+	<td>favoriteCount</td>
+	<td>Number of favorites</td>
+</tr>
+<tr>
+	<td>retweetCount</td>
+	<td>Number of retweet</td>
+</tr>
+<tr>
+	<td>latitude</td>
+	<td>Latitude of the tweet</td>
+</tr>
+<tr>
+	<td>longitude</td>
+	<td>Longitude of the tweet</td>
+</tr>
+</tbody>
+</table> 
+
+### Dataframe 2
+```
+getTrendsByCoord <- function(.,la=0,lo=0)
+```  
+```
+getTrendsByCity <- function(.,city="San Francisco")
+```     
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>Name of the tag</td>
+</tr>
+<tr>
+	<td>url</td>
+	<td>Url of the query</td>
+</tr>
+<tr>
+	<td>query</td>
+	<td>Query asked for</td>
+</tr>
+</tbody>
+</table> 
+
 ## Venmo
 ### Dataframe
 ```
