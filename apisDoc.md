@@ -22,6 +22,11 @@
 	<td>No</td>
 </tr>
 <tr>
+	<td>Crunchbase</td>
+	<td>Data</td>
+	<td>Yes</td>
+</tr>
+<tr>
 	<td>Dailymotion</td>
 	<td>Video</td>
 	<td>No</td>
@@ -208,6 +213,38 @@ getHot <- function(.)
 <tr>
 	<td>description</td>
 	<td>Description of the article</td>
+</tr>
+</tbody>
+</table>
+
+## Crunchbase
+## Dataframe
+```
+newOrganisations <- function(.)
+```  
+```
+updatedOrganizations <- function(.)
+```  
+```
+searchOrganization <- function(.,text="")
+```  
+```
+newPeople <- function(.)
+```  
+```
+newProducts <- function(.)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> - </td>
+	<td>Data asked for</td>
 </tr>
 </tbody>
 </table>
