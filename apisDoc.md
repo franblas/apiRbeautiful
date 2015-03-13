@@ -37,6 +37,11 @@
 	<td>No</td>
 </tr>
 <tr>
+	<td>Docker</td>
+	<td>Code</td>
+	<td>No</td>
+</tr>
+<tr>
 	<td>Ebay</td>
 	<td>Shopping</td>
 	<td>Yes</td>
@@ -370,6 +375,34 @@ getRecent <- function(., limit=10)
 </tr>
 </tbody>
 </table>
+## Docker
+### Dataframe
+```
+search <- function(., text="", limit=100)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>name</td>
+	<td>Name of the image</td>
+</tr>
+<tr>
+	<td>star_count</td>
+	<td>Popularity of the repository</td>
+</tr>
+<tr>
+	<td>description</td>
+	<td>Description of the image</td>
+</tr>
+</tbody>
+</table>
+
 ## Ebay
 ### Dataframe
 ```
