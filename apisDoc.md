@@ -67,6 +67,11 @@
 	<td>No</td>
 </tr>
 <tr>
+	<td>Instagram</td>
+	<td>Picture</td>
+	<td>Yes</td>
+</tr>
+<tr>
 	<td>Osm</td>
 	<td>Map</td>
 	<td>No</td>
@@ -741,6 +746,144 @@ searchName <- function(., text="")
 </tr>
 </tbody>
 </table>
+
+## Instagram
+### Dataframe
+```
+getPopular <- function(., limit=10)
+```
+```
+searchByCoordinates <- function(.,lat=48.858844,lon=2.294351,limit=10)
+```
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> link </td>
+	<td>Lnk of the content</td>
+</tr>
+<tr>
+	<td> filter </td>
+	<td>Filter used for the picture</td>
+</tr>
+<tr>
+	<td> users_in_photo </td>
+	<td>Users tagged in the picture</td>
+</tr>
+<tr>
+	<td> latitude </td>
+	<td>Latitude of the content</td>
+</tr>
+<tr>
+	<td> longitude </td>
+	<td>Longitude of the content</td>
+</tr>
+<tr>
+	<td> loc_name </td>
+	<td>Place's name of the content</td>
+</tr>
+<tr>
+	<td> count_com </td>
+	<td>Number of commentaries</td>
+</tr>
+<tr>
+	<td> data_com </td>
+	<td>Text of the commentaries</td>
+</tr>
+<tr>
+	<td> count_like </td>
+	<td>Number of likes</td>
+</tr>
+<tr>
+	<td> title </td>
+	<td>Title of the content</td>
+</tr>
+</tbody>
+</table>  
+### Dataframe 2
+```
+getTags <- function(.,text="")
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> media_count </td>
+	<td>Tag's popularity</td>
+</tr>
+<tr>
+	<td> name </td>
+	<td>Tag's name</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 3
+```
+searchLocations <- function(.,lat=48.858844,lon=2.294351,limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> name </td>
+	<td>Place's name</td>
+</tr>
+<tr>
+	<td> latitude </td>
+	<td>Place's latitude</td>
+</tr>
+<tr>
+	<td> longitude </td>
+	<td>Place's longitude</td>
+</tr>
+</tbody>
+</table>
+### Dataframe 4
+```
+searchUsers <- function(.,text="",limit=10)
+```  
+<table>
+<thead>
+<tr>
+	<th>Column</th>
+	<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td> username </td>
+	<td>User's name</td>
+</tr>
+<tr>
+	<td> full_name </td>
+	<td>Full user's name</td>
+</tr>
+<tr>
+	<td> id </td>
+	<td>User's id</td>
+</tr>
+<tr>
+	<td> profile_picture </td>
+	<td>User's profile picture</td>
+</tr>
+</tbody>
+</table>
+
 ## OSM 
 ### Dataframe
 ```
